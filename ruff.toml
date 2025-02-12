@@ -1,0 +1,22 @@
+
+# Allow lines to be as long as 120.
+line-length = 80
+indent-width = 4
+
+[format]
+docstring-code-format = true
+docstring-code-line-length = 60
+[lint]
+# Selección de reglas
+select = ["E", "F", "UP", "B", "SIM", "I"]
+
+# Configuración adicional
+extend-fixable = ["B"]
+extend-select = ["I"]
+
+[analyze]
+detect-string-imports = true
+
+
+[lint.flake8-quotes]
+docstring-quotes = "double"

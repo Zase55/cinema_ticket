@@ -1,0 +1,57 @@
+version: "3.4"
+x-restart-policy: &restart_policy
+  restart: unless-stopped
+
+services:
+
+  # Databases
+  database:
+    <<: *restart_policy
+    image: "postgres:12.2"
+    environment:
+      POSTGRES_DB: "root"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root!"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "root-database:/var/lib/postgresql/data"
+    networks:
+      - internal
+
+  # Web
+  web:
+    <<: *restart_policy
+    build:
+      target: local
+      context: root/
+    working_dir: /home/ubuntu/webs/root/root
+    command: ./bin/run.sh
+    depends_on:
+      - database
+    ports:
+      - "3031:3031"
+      - "4444:4444"
+      - "8000:8000"
+    volumes:
+      - ./root:/home/ubuntu/webs/root/root
+    networks:
+      - internal
+
+  redis:
+    <<: *restart_policy
+    image: "redis:7.4.2"
+    ports:
+      - "6389:6379"      
+    volumes:
+      - "root-redis:/data"
+    networks:
+     - internal
+
+volumes:
+  root-database:
+  root-redis:
+
+networks:
+  internal:
+    driver: bridge
