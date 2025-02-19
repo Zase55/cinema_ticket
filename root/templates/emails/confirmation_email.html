@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activación de cuenta</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);">
+        <tr>
+            <td style="background-color: #007bff; color: #ffffff; text-align: center; padding: 15px 20px; font-size: 20px; font-weight: bold;">
+                Activación de cuenta
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 20px; text-align: center;">
+                <p style="font-size: 16px; color: #333;">Hola <strong>{{ user.username }}</strong>,</p>
+                <p style="font-size: 16px; color: #555;">
+                    Gracias por registrarte en nuestro sitio web. Para activar tu cuenta, haz clic en el siguiente botón:
+                </p>
+                <p style="margin: 20px 0;">
+                    <a href="{{ domain }}" 
+                       style="display: inline-block; background-color: #007bff; color: #ffffff; text-decoration: none; padding: 10px 20px; font-size: 16px; border-radius: 5px;">
+                        Activar Cuenta
+                    </a>
+                </p>
+                <p style="font-size: 14px; color: #777;">
+                    Si no solicitaste esta activación, ignora este mensaje.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td style="background-color: #f8f8f8; color: #666; text-align: center; padding: 15px; font-size: 12px;">
+                &copy; Cinema Ticket - Todos los derechos reservados.
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
