@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block container %}
+    <title>Peliculas</title>
+
+    {% if user.is_authenticated %}
+        <h1>Peliculas Disponibles</h1>
+
+        <div style="display: flex; flex-wrap: wrap;">
+            {% for pelicula in peliculas %}
+                <div style="border: 1px solid #ddd; padding: 10px; margin: 10px; width: 200px;">
+                    <h3>{{ pelicula.name }}</h3>
+                    <p>{{ pelicula.sala }}</p>
+                </div>
+            {% empty %}
+                <p>No hay peliculas disponibles.</p>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>No tienes dinero, el capitalismo te ha destrozado.</h1>
+    {% endif %}
+    
+{% endblock %}
