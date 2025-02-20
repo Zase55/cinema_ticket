@@ -52,7 +52,7 @@
 /* Estilo para el fondo cuando el navbar se expande en móvil */
 @media (max-width: 991px) {
     .navbar-nav {
-        background-color: #343a40;
+        background-color: #18613d;
         padding: 10px;
         border-radius: 5px;
     }
