@@ -9,10 +9,10 @@
             <div class="h1 text-center">Peliculas Disponibles</div>
 
             <div class="d-flex justify-content-center">
-                {% for pelicula in peliculas %}
+                {% for movie in movies %}
                     <div style="border: 1px solid #ddd; padding: 10px; margin: 10px; width: 200px;">
-                        <h3>{{ pelicula.name }}</h3>
-                        <p>{{ pelicula.sala }}</p>
+                        <h3>{{ movie.name }}</h3>
+                        <p>{{ movie.poster }}</p>
                     </div>
                 {% empty %}
                     <p>No hay peliculas disponibles.</p>

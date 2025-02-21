@@ -7,8 +7,6 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
-print(f"BASE: {BASE_DIR}")
-print(f"ROOT: {ROOT_DIR}")
 
 load_dotenv(dotenv_path=Path(BASE_DIR) / "../.env")
 SECRET_KEY = os.environ.get("SECRET_KEY")
@@ -29,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "bookings",
+    "cinema",
     "payments",
     "users",
     "crispy_forms",

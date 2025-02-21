@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from bookings.views import home_request
+from cinema.views import home_request
 from users.views import register, verify_email
 
 urlpatterns = [
