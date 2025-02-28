@@ -3,20 +3,22 @@
 {% load static %}
 
 {% block container %}
-    <title>Peliculas</title>
     <div class="container">
         {% if user.is_authenticated %}
             <div class="h1 text-center">Peliculas Disponibles</div>
 
             <div class="d-flex justify-content-center">
                 {% for movie in movies %}
-                    <div style="border: 1px solid #ddd; padding: 10px; margin: 10px; width: 200px;">
-                        <h3>{{ movie.name }}</h3>
-                        <p>{{ movie.poster }}</p>
-                    </div>
+                    <section class="section">
+                        <div style="border: 1px solid #ddd; padding: 10px; margin: 10px; width: 200px;">
+                            <h3>{{ movie.title }}</h3>
+                            <img src={{ movie.poster }} alt="">
+                        </div>
+                    </section>
                 {% empty %}
                     <p>No hay peliculas disponibles.</p>
                 {% endfor %}
+                <button class="button is-primary" id="submitBtn">Comprar!</button>
             </div>
         {% else %}
             <div class="h1 text-center">No tienes dinero, el capitalismo te ha destrozado.</div>
