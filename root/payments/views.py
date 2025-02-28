@@ -5,16 +5,12 @@ from django.views.generic.base import TemplateView
 from django.http.response import JsonResponse, HttpResponse
 import stripe
 
-class HomePageView(TemplateView):
-    template_name = 'home.html'
-
-
 class SuccessView(TemplateView):
-    template_name = 'success.html'
+    template_name = 'payments/success.html'
 
 
 class CancelledView(TemplateView):
-    template_name = 'cancelled.html'
+    template_name = 'payments/cancelled.html'
 
 
 @csrf_exempt
@@ -36,14 +32,16 @@ def create_checkout_session(request):
                 cancel_url=domain_url + 'cancelled/',
                 payment_method_types=['card'],
                 mode='payment',
-                line_items=[
-                    {
-                        'name': 'T-shirt',
-                        'quantity': 1,
-                        'currency': 'usd',
-                        'amount': '2000',
-                    }
-                ]
+                line_items=[{
+                    'price_data': {
+                        'currency': 'eur',
+                        'product_data': {
+                            'name': 'Entrada',
+                        },
+                        'unit_amount': int(7.9 * 100)  # Convertimos euros a céntimos
+                    },
+                    'quantity': 1
+                }]
             )
             return JsonResponse({'sessionId': checkout_session['id']})
         except Exception as e:
