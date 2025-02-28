@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "payments.apps.PaymentsConfig",
     "bookings",
     "cinema",
     "payments",
