@@ -7,8 +7,6 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
-print(f"BASE: {BASE_DIR}")
-print(f"ROOT: {ROOT_DIR}")
 
 load_dotenv(dotenv_path=Path(BASE_DIR) / "../.env")
 SECRET_KEY = os.environ.get("SECRET_KEY")
@@ -29,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "bookings",
+    "cinema",
     "payments",
     "users",
     "crispy_forms",
@@ -120,7 +119,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 STATICFILES_DIRS = [
     os.path.join(ROOT_DIR, "static"),
 ]
@@ -156,3 +155,16 @@ if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
         (f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}')
     ]
     MANAGERS=ADMINS
+
+# Stripe
+STRIPE_PUBLISHABLE_KEY = config("STRIPE_PUBLISHABLE_KEY", cast=str, default=None)
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY", cast=str, default=None)
+STRIPE_ENDPOINT_SECRET = config("STRIPE_ENDPOINT_SECRET", cast=str, default=None)
+
+# celery
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BACKEND", "redis://redis:6379/0")
+CELERY_TIMEZONE = "Europe/Madrid"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+APPLY_ASYNC = config("APPLY_ASYNC", cast=bool, default=True)

@@ -190,6 +190,9 @@ root/static_root
 root/root/static_root/
 root/root/static_root
 
+# statifiles
+root/staticfiles
+
 # install logs
 install_log*.txt
 
