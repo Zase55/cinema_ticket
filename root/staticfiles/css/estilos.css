@@ -1,7 +1,7 @@
 /* Estilo del navbar */
 .navbar {
-    background-color: #18613d; /* Color de fondo oscuro */
-    padding: 10px 20px;
+    padding: 2rem;
+    background:  #274429;
 }
 
 /* Estilo de los enlaces del navbar */
@@ -24,7 +24,7 @@
 }
 
 .navbar .nav-link:hover {
-    color: #17a2b8; /* Cambia el color al pasar el mouse */
+    color: #a8abac; /* Cambia el color al pasar el mouse */
 }
 
 /* Estilo del botón hamburguesa en dispositivos móviles */
@@ -32,8 +32,9 @@
     border-color: rgba(255, 255, 255, 0.5);
 }
 
-.navbar-toggler-icon {
-    background-color: #ffffff;
+.navbar-collapse {
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* Ajuste de espaciado para que el menú se vea más limpio */
@@ -52,7 +53,7 @@
 /* Estilo para el fondo cuando el navbar se expande en móvil */
 @media (max-width: 991px) {
     .navbar-nav {
-        background-color: #343a40;
+        background-color: #274429;
         padding: 10px;
         border-radius: 5px;
     }
