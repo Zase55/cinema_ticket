@@ -1,3 +1,7 @@
 from django.contrib import admin
+from cinema.models import Movie
 
-# Register your models here.
+class MoviesAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Movie, MoviesAdmin)

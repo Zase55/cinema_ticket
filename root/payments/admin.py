@@ -1,3 +1,7 @@
 from django.contrib import admin
+from payments.models import Product
 
-# Register your models here.
+class ProductsAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Product, ProductsAdmin)
