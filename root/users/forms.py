@@ -1,12 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
-from django.core.mail import EmailMessage
 from django.conf import settings
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import force_bytes
-from django.contrib.auth.tokens import default_token_generator
-from django.template.loader import render_to_string
+from users.tasks import process_send_confirmation_email
 
 class CustomLoginForm(AuthenticationForm):
     username = forms.CharField(label="Usuario", max_length=150)
@@ -24,18 +20,13 @@ class CustomUserCreationForm(UserCreationForm):
         return user
     
     def send_confirmation_email(self, user):
-        uid = urlsafe_base64_encode(force_bytes(user.pk))
-        token = default_token_generator.make_token(user)
-        verification_link = (
-            f'{settings.BASE_APP_URL}/verify-email/{uid}/{token}/'
-        )
-        mail_subject = 'Activation link has been sent to your email id'
-        message = render_to_string( 'emails/confirmation_email.html', {
-            'user': user,
-            'domain': verification_link,
-            'uid':uid,
-            'token':token, })
-        to_email = self.cleaned_data['email']
-        email = EmailMessage(mail_subject, message, to=[to_email])
-        email.content_subtype = "html"
-        email.send()
+        if settings.APPLY_ASYNC:
+            print("Se ha enviado asincronamente.")
+            process_send_confirmation_email.apply_async(
+                args = [user.pk]
+            )
+        else:
+            print("Se ha enviado de manera sincrona.")
+            process_send_confirmation_email.apply(
+                args = [user.pk]
+            )

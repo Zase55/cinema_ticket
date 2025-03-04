@@ -35,6 +35,58 @@ services:
       - "8000:8000"
     volumes:
       - ./root:/home/ubuntu/webs/root/root
+    env_file:
+      - root/.env
+    networks:
+      - internal
+
+  celery_beat:
+    <<: *restart_policy
+    build:
+      context: root/
+    image: "cinema_celery_beat"
+    command: ./bin/celery_beat_start.sh
+    volumes:
+      - ./root:/home/ubuntu/webs/root/root
+    env_file:
+      - root/.env
+    depends_on:
+      - web
+      - redis
+    networks:
+      - internal
+
+  celery_worker:
+    <<: *restart_policy
+    build:
+      context: root/
+    image: "cinema_celery_worker"
+    command: ./bin/celery_worker_start.sh
+    volumes:
+      - ./root:/home/ubuntu/webs/root/root
+    env_file:
+      - root/.env
+    depends_on:
+      - web
+      - redis
+    networks:
+      - internal
+
+  celery_flower:
+    <<: *restart_policy
+    build:
+      context: root/
+    image: django_celery_example_celery_flower
+    command: ./bin/celery_flower_start.sh
+    volumes:
+      - ./root:/home/ubuntu/webs/root/root
+    env_file:
+      - root/.env
+    depends_on:
+      - web
+      - redis
+    ports:
+      - 5557:5555
     networks:
       - internal
 
