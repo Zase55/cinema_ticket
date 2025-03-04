@@ -159,3 +159,4 @@ if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
 # Stripe
 STRIPE_PUBLISHABLE_KEY = config("STRIPE_PUBLISHABLE_KEY", cast=str, default=None)
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY", cast=str, default=None)
+STRIPE_ENDPOINT_SECRET = config("STRIPE_ENDPOINT_SECRET", cast=str, default=None)
